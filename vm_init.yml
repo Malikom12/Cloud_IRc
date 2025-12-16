@@ -1,0 +1,30 @@
+#cloud-config
+# same config file from class, i only changed it for irc
+
+# update packages first then install what is needed
+package_upgrade: true
+packages:
+  - ngircd    # this is the irc server
+  - irssi     # irc client for tesitng
+  - default-jre  # java runtime
+
+write_files:
+  # Once this file is created it means cloud init is complete
+  - owner: developer:developer
+    path: /home/developer/cloud_init_done.txt
+    defer: true
+    content: |
+      Cloud init work is done!
+  # this message will showe when users connect
+  - owner: root:root
+    path: /etc/ngircd/ngircd.motd
+    defer: false
+    content: |
+      ********************************
+      * CA1 PRIVATE IRC SERVER       *
+      ********************************
+
+# commands to run once everything is installed
+runcmd:
+  - service ngircd enable
+  - service ngircd restart
