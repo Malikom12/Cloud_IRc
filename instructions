@@ -1,0 +1,17 @@
+login to Azure portal via the az cli extention using az login.
+use cd command to change directory to files directory e.g. "cd C:\Users\Muhammad\cloud\Cloud_IRc"
+run ./setup.ps1 to run the setup file which will create the resource group and linux virtual machine with all packages needed installed using vm_init.yml file.
+Wait for installation process to finish, if resource group already exists setup will not proceed and will prompt you to run teardown file, once teardown is done only then it will; proceed. (Indempotent)
+Once setup is complete copy ip address which will be displayed at end as follows : "VM Public IP:........."
+run command ssh developer@(ip address) to ssh into virtual machine, please note that sometimes it can take a few minutes for vm initialisation.
+check if cloud config file has run successfully by running cat /home/developer/cloud_init_done.txt command, it should display Cloud init work is done!
+Then run "systemctl status nginx" command to verify nginx dashboard is up and running.
+to test the irc server:
+type irssi
+then type /CONNECT 127.0.0.1
+join a channel using /JOIN #general
+quit with /QUIT
+open chrome on your home pc and go to http://(ip address)
+you should see the irc server dashboard.
+to quit linux vm type quit
+when finished run ./teardown.ps1 to delete everything.

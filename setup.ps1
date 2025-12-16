@@ -56,6 +56,7 @@ az vm open-port --resource-group $ResourceGroup --name $VmName --port 6667 --pri
 # using port 80 for the web dashboard
 Write-Host 'Opening port 80 for Web Dashboard'
 az vm open-port --resource-group $ResourceGroup --name $VmName --port 80 --priority 1002
+#the priority flag just allows you to give priority or order in which rule is created, if you do not give an order they crash. Reason for setting it to 1001 and 1002 is because ssh is set to 1000 by default
 
 # get the ip address to know where to connect
 $ip = az vm show -d -g $ResourceGroup -n $VmName --query publicIps -o tsv
