@@ -51,11 +51,11 @@ az vm create `
 
 # open port 6667 for irc connections
 Write-Host 'Opening port 6667 for IRC'
-az vm open-port --resource-group $ResourceGroup --name $VmName --port 6667
+az vm open-port --resource-group $ResourceGroup --name $VmName --port 6667 --priority 1001
 
 # using port 80 for the web dashboard
 Write-Host 'Opening port 80 for Web Dashboard'
-az vm open-port --resource-group $ResourceGroup --name $VmName --port 80
+az vm open-port --resource-group $ResourceGroup --name $VmName --port 80 --priority 1002
 
 # get the ip address to know where to connect
 $ip = az vm show -d -g $ResourceGroup -n $VmName --query publicIps -o tsv
