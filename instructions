@@ -15,3 +15,13 @@ open chrome on your home pc and go to http://(ip address)
 you should see the irc server dashboard.
 to quit linux vm type quit
 when finished run ./teardown.ps1 to delete everything.
+
+
+References:
+https://learn.microsoft.com/en-us/cli/azure/group?view=azure-cli-latest - used for creating resource groups with tags
+https://cloudinit.readthedocs.io/en/latest/reference/modules/write_files.html - Used to create the HTML dashboard file
+https://ubuntu.com/tutorials/install-and-configure-nginx - Used for installing the web server package in the yaml file
+
+for idempotency check i used linux_vm_checks.ps1 lab .
+for teardown irc_deployment_lab.
+and for vm_init.yml i used vm_config.yml from lab.
