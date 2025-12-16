@@ -7,6 +7,7 @@ packages:
   - ngircd    # this is the irc server
   - irssi     # irc client for tesitng
   - default-jre  # java runtime
+  - nginx   # web server for the dashboard     
 
 write_files:
   # Once this file is created it means cloud init is complete
@@ -24,7 +25,56 @@ write_files:
       * CA1 PRIVATE IRC SERVER       *
       ********************************
 
+#landing page
+  - owner: www-data:www-data
+    path: /var/www/html/index.html
+    permissions: '0644'
+    content: |
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>CA1 IRC Server</title>
+        <style>
+          body { 
+            background-color: skyblue; 
+            font-family: sans-serif; 
+            text-align: center; 
+            padding-top: 60px; 
+          }
+          .box { 
+            background: white; 
+            padding: 30px; 
+            border-radius: 15px; 
+            display: inline-block; 
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.2); 
+            border: 4px solid white;
+          }
+          h1 { color: #333; text-transform: uppercase; }
+          .badge { 
+            background: green; 
+            color: white; 
+            padding: 5px 10px; 
+            border-radius: 5px; 
+            font-weight: bold; 
+          }
+        </style>
+      </head>
+      <body>
+        <div class="box">
+          <h1>IRC Server Status</h1>
+          <p>Current Status: <span class="badge">RUNNING</span></p>
+          <hr>
+          <p>Connect via your IRC Client:</p>
+          <h3>/CONNECT [IP_ADDRESS] 6667</h3>
+        </div>
+      </body>
+      </html>
+
 # commands to run once everything is installed
 runcmd:
   - service ngircd enable
   - service ngircd restart
+
+  #commands to run nginx
+  - service nginx enable
+  - service nginx restart
