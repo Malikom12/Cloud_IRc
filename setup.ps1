@@ -53,7 +53,12 @@ az vm create `
 Write-Host 'Opening port 6667 for IRC'
 az vm open-port --resource-group $ResourceGroup --name $VmName --port 6667
 
+# using port 80 for the web dashboard
+Write-Host 'Opening port 80 for Web Dashboard'
+az vm open-port --resource-group $ResourceGroup --name $VmName --port 80
+
 # get the ip address to know where to connect
 $ip = az vm show -d -g $ResourceGroup -n $VmName --query publicIps -o tsv
 Write-Host 'Setup complete' -ForegroundColor Green
 Write-Host "VM Public IP: $ip"
+Write-Host "Web Dashboard: http://$ip"
